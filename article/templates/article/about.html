@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block page_title %}
+<title>{{page_title}}</title>
+{% endblock page_title %}
+<!-- MAIN CONTENT -->
+
+
+{% block contents %}
+<div class="row blog-entries element-animate">
+    <div class="col-md-12 col-lg-8 main-content">
+        <h2 class="mb-4">{{heading}}</h2>
+        <p class="mb-5"><img src="{% static 'blog/images/foto_about_page.JPG' %}" alt="Image placeholder" class="img-fluid"></p>
+        <p><strong>Bismillah.</strong></p>
+        <blockquote>
+        <p>I haven't done any professional job yet. But although I’m a fresh graduate, I have some certificated in machine learning and web development. Though I'm novice, I always ready for new learn things. Specifically, I'm very interested in python for data science or data analysis, and web development (django framework)</p>
+        </blockquote>
+        <p>Setidaknya itulah ringkasan yang tertulis di linkedin saya (akhirnya bahasa indonesia!), 
+          tidak usah perkenalan ya karena mungkin yang ada di web ini sudah cukup untuk perkenalan 
+          siapa nama saya atau dari mana saya. Web ini dibangun untuk menuliskan apa saja tentang
+          yang penulis pernah buat sebelumnya, khususnya sains data atau mungkin juga akan ada artikel random penulis tidak tahu.
+          Kenapa <b>cryppy</b>? berdasarkan <em> urban dictionary</em> <b> cryppy</b> berarti <em>When you cry but your happy</em>
+          bukan. Ya bukan. Sebenarnya bukan dari situ nama ini berasal, tapi dari kata <em>cripple;</em>lumpuh atau cacat.
+          Jadi penulis iseng untuk mengganti kata tadi dengan gabungan dari dua kata <em> cry</em> dan <em>happy</em>. Terakhir, tentang
+          <em>tagline</em> web ini 
+        </p>
+        <p>
+          <blockquote><p>Built on Mission</p></blockquote> ya, tujuan utama web ini
+          dibangun untuk portofolio penulis sendiri, tentang <em>web development</em> (web ini adalah aplikasi pertama penulis yang dibuat dengan django hahaha) dan sains data karena sebaik-baiknya
+          portofolio sains data adalah bukan yang ada di github tetapi yang bisa diceritakan dan dijelaskan. Semoga penulis
+          dapat istiqomah menyebarkan informasi dan yang penting adalah semoga apa yang penulis tulis disini dapat bermanfaat untuk orang banyak
+          mari kita ulangi judul diatas <em>How is the world now?</em> ya, dunia terlalu banyak disapa dengan kata <em>hello world</em>
+          tapi kita jarang untuk menanyakan bagaimana kabar dunia sekarang? di jawab dalam hati aja ya. Terima kasih sudah membaca perkenalan ini sampai disini.
+        </p>
+      </div>
+      <!-- END main-content -->
+
+      <!-- START SIDEBAR --> 
+      <div class="col-md-12 col-lg-4 sidebar">
+          <!-- TENTANG PENULIS -->
+          <div class="sidebar-box">
+            <div class="bio text-center">
+              <img src="{% static 'blog/images/foto.jpg' %}" alt="Image Placeholder" class="img-fluid">
+              <div class="bio-body">
+                <h2>Adwin Nugroho Siswoyo</h2>
+                <p>Data science enthusiasts, the man who love football and you.</p>
+                <p><a href="https://adwinugroho.github.io/" class="btn btn-primary btn-sm rounded">Read my resume</a></p>
+                <p class="social">
+                    <a href="http://www.facebook.com/adwinugroho94/" class="p-2"><span class="fa fa-facebook"></span></a>
+                    <a href="http://www.twitter.com/adwinugroho/" class="p-2"><span class="fa fa-twitter"></span></a>
+                    <a href="http://www.instagram.com/adwinnsiswoyo" class="p-2"><span class="fa fa-instagram"></span></a>
+                    <a href="http://www.github.com/adwinugroho" class="p-2"><span class="fa fa-github"></span></a>
+                    <a href="http://www.linkedin.com/in/adwin-nugroho-siswoyo" class="p-2"><span class="fa fa-linkedin"></span></a>
+                  </p>
+              </div>
+            </div>
+          </div>
+          <!-- END TENTANG PENULIS -->
+          <!-- END sidebar-box -->  
+          <div class="sidebar-box">
+            <h3 class="heading">Popular Post</h3>
+            <div class="post-entry-sidebar">
+              <ul>
+                  {% block list_recentpost %}
+                  {% for obj in articles_by_comment %}
+                    <li>
+                      <a href="{% url 'article:detail' slugInput=obj.slug %}">
+                        {% if obj.thumbnail %}
+                          <img src="{{obj.thumbnail.url}}" alt="Image placeholder" class="mr-4" style="width:100px;height:100px;">  
+                        {% else %}
+                          <img src="{% static 'blog/images/no-image.jpeg' %}" alt="Image placeholder" class="mr-4" style="width:100px;height:100px;">
+                        {% endif %}
+                        <div class="text">
+                          <h4>{{obj.title}}</h4>
+                        <div class="post-meta">
+                          <span class="mr-2">{{obj.timestamp|date}}</span>  
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                  {% endfor %}
+                {% endblock list_recentpost %}
+              </ul>
+            </div>
+          </div>
+          <!-- END sidebar-box -->
+    
+          <div class="sidebar-box">
+            <h3 class="heading">Categories</h3>
+            {% block list_categories_sidebar %}
+            <ul class="categories">
+                {% for cat in categories %}
+                  <li><a href="{% url 'article:category' categoryInput=cat %}">{{cat}}</a></li>  
+                {% endfor %}
+              </ul>
+            {% endblock list_categories_sidebar %}        
+          </div>
+        </div>
+      </div>
+{% endblock contents %}  

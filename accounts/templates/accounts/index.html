@@ -1,0 +1,90 @@
+{% extends 'accounts/base.html' %}
+    
+{% block card_home_dashboard %}
+<div class="row">
+    <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+        <div class="card card-statistic-1">
+            <div class="card-icon bg-primary">
+                <i class="far fa-user"></i>
+            </div>
+            <div class="card-wrap">
+                <div class="card-header">
+                    <h4>Total Authors</h4>
+                </div>
+            <div class="card-body">
+                {{total_author.count}}
+            </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+        <div class="card card-statistic-1">
+            <div class="card-icon bg-warning">
+                <i class="far fa-file"></i>
+            </div>
+            <div class="card-wrap">
+                <div class="card-header">
+                    <h4>Total Articles</h4>
+                </div>
+                <div class="card-body">
+                    {{total_article.count}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock card_home_dashboard %}
+
+
+{% block contents %}
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+            <h4>All your post</h4>
+            </div>
+            <div class="card-body">
+            {% for message in messages %}
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{message}} 
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            {% endfor %}
+            {% if author or request.user.is_staff %}
+                <div class="table-responsive">
+                <table class="table table-striped" id="myTable">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Title</th>
+                    <th>Timestamp</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                    {% for obj in article %}
+                    <tr>
+                        <td>{{forloop.counter}}</td>
+                        <td>{{obj.title}}</td>
+                        <td>{{obj.timestamp}}</td>
+                        <td>
+                            <a href="{% url 'accounts:editArticle' obj.id %}" class="btn btn-primary btn-action mr-1" data-toggle="tooltip" title="Edit"><i class="fas fa-pencil-alt"></i></a>
+                            <a href="{% url 'accounts:deleteConfirmArticle' obj.id %}" class="btn btn-danger btn-action" data-toggle="tooltip" title="Delete"><i class="fas fa-trash"></i></a>
+                        </td>    
+                    {% endfor %}
+                    </tr>
+                </tbody>
+                </table>
+                </div>
+            {% else %}
+            <h4>Sorry, you're not author, please contact admin</h4>
+            <hr>
+            <h5>adwinnugroho16@gmail.com</h5>
+            {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock contents %}

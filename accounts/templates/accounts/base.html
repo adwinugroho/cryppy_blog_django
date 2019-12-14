@@ -1,0 +1,74 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
+  <title>{{page_title}}</title>
+
+  <!-- General CSS Files -->
+  {% include 'accounts/snippets/styles.html' %}
+</head>
+
+<body>
+  <div id="app">
+    <div class="main-wrapper main-wrapper-1">
+      <div class="navbar-bg"></div>
+      <nav class="navbar navbar-expand-lg main-navbar">
+        <ul class="navbar-nav navbar-right">
+          <li class="dropdown"><a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
+            <img alt="image" src="{% static 'dashboard/assets/img/avatar/avatar-1.png' %}" class="rounded-circle mr-1">
+            <div class="d-sm-none d-lg-inline-block">Hi, {{user.username}}</div></a>
+            <div class="dropdown-menu dropdown-menu-right">
+              {% if author or request.user.is_staff %}
+              <a href="{% url 'accounts:profile' %}" class="dropdown-item has-icon">
+                <i class="far fa-user"></i> Profile
+              </a>
+              {% endif %}
+              <div class="dropdown-divider"></div>
+              {% if user.is_authenticated %}
+              <a href="{% url 'accounts:logout' %}" class="dropdown-item has-icon text-danger">
+                  <i class="fas fa-sign-out-alt"></i> Logout
+                </a>
+              {% endif %}
+            </div>
+          </li>
+        </ul>
+      </nav>
+      <!-- Side Bar -->
+      {% include 'accounts/snippets/sidebar.html' %}
+
+      <!-- Main Content -->
+      <div class="main-content">
+          <section class="section">
+            <div class="section-header">
+              <h1>Welcome to dashboard, {{user.username}}. <a href="{% url 'home' %}">Visit site</a> </h1>
+            </div>
+            {% block card_home_dashboard %}
+              
+            {% endblock card_home_dashboard %}
+            <div class="section-body">
+              
+              {% block contents %}
+                
+              {% endblock contents %}
+                
+            </div>
+          </section>
+        </div>
+      <!-- End Main Content -->
+      
+      <!-- Start Main Footer -->
+      {% include 'accounts/snippets/footer.html' %}
+    </div>
+  </div>
+
+  <!-- General JS Scripts -->
+  {% include 'accounts/snippets/scripts.html' %}
+
+  <!-- Page Specific JS File -->
+  <script src="{% static 'dashboard/assets/js/page/index-0.js' %}"></script>
+  <!-- Template JS File -->
+  
+</body>
+</html>

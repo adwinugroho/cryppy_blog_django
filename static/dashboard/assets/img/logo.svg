@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="594mm"
+   height="420mm"
+   viewBox="0 0 594 420"
+   version="1.1"
+   id="svg8"
+   inkscape:version="0.92.4 (f8dce91, 2019-08-02)"
+   sodipodi:docname="logo.svg">
+  <defs
+     id="defs2">
+    <style
+       id="style10">.cls-1{fill:white;}.cls-2{fill:#6777ef;stroke:none;stroke-miterlimit:10;stroke-width:30px;}</style>
+    <font
+       horiz-adv-x="1024"
+       id="font34"
+       inkscape:label="font 1"
+       horiz-origin-x="0"
+       horiz-origin-y="0"
+       vert-origin-x="45"
+       vert-origin-y="90"
+       vert-adv-y="90">
+      <font-face
+         units-per-em="1024"
+         id="font-face36"
+         font-family="SVGFont 1" />
+      <missing-glyph
+         d="M0,0h1000v1024h-1000z"
+         id="missing-glyph38" />
+    </font>
+    <style
+       id="style16">.cls-1{fill:white;}.cls-2{fill:#6777ef;stroke:none;stroke-miterlimit:10;stroke-width:30px;}</style>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#1d1d1d"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.175"
+     inkscape:cx="926.45776"
+     inkscape:cy="709.59141"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     units="mm"
+     inkscape:window-width="1366"
+     inkscape:window-height="717"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,123)">
+    <g
+       id="g4553"
+       transform="matrix(1.8342857,0,0,1.8342857,81.629907,-430.49878)">
+      <g
+         transform="matrix(0.30744418,0,0,0.30744418,-19.69951,130.05468)"
+         id="g28">
+        <circle
+           style="fill:#ffffff"
+           class="cls-1"
+           cx="474.28571"
+           cy="517.14288"
+           r="500"
+           id="circle16" />
+      </g>
+      <text
+         id="text32"
+         y="303.84274"
+         x="-17.683336"
+         style="font-style:normal;font-weight:normal;font-size:36.35053635px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#6777ef;fill-opacity:1;stroke:none;stroke-width:0.90876335"
+         xml:space="preserve"><tspan
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:87.2412796px;font-family:'Nimbus Sans L';-inkscape-font-specification:'Nimbus Sans L Bold';fill:#6777ef;fill-opacity:1;stroke-width:0.90876335"
+           y="303.84274"
+           x="-17.683336"
+           id="tspan30"
+           sodipodi:role="line">cryppy</tspan></text>
+    </g>
+  </g>
+</svg>

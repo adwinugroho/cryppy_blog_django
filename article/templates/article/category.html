@@ -1,0 +1,131 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block page_title %}
+<title>{{page_title}}</title>
+{% endblock page_title %}
+<!-- MAIN CONTENT -->
+{% block contents %}
+    <div class="row mb-4">
+        <div class="col-md-6">
+        {% for obj in cat_page %}
+          <h2 class="mb-4">Category: {{obj.title}}</h2>
+        {% endfor %}
+          </div>
+    </div>
+    <div class="row blog-entries">
+        <div class="col-md-12 col-lg-8 main-content">
+            <div class="row mb-5 mt-5">
+              <div class="col-md-12">
+                {% for obj in articles_page %}
+                <div class="post-entry-horzontal">
+                  <a href="{% url 'article:detail' slugInput=obj.slug %}">
+                    {% if obj.thumbnail %}
+                    <div class="image element-animate" data-animate-effect="fadeIn" style="background-image: url({{obj.thumbnail.url}});"></div>
+                    {% else %}
+                    <div class="image element-animate" data-animate-effect="fadeIn" style="background-image: url({% static 'blog/images/no-image.jpeg' %});"></div>
+                    {% endif %}
+                    <span class="text">
+                  <div class="post-meta">
+                    <span class="author mr-2"><img src="{% static 'blog/images/default.png' %}" alt="Colorlib" class="mr-2">{{obj.author.user}}</span>&bullet;
+                    <span class="mr-2">{{obj.timestamp|date}}</span> &bullet;
+                  </div>
+                      <h2>{{obj.title}}</h2>
+                    </span>
+                  </a>
+                </div>
+                {% endfor %}
+                <div class="col-md-12 text-center">
+                    <nav aria-label="Page navigation" class="text-center">
+                      {% if articles_page.has_other_pages %}
+                        <ul class="pagination">
+                          {% if articles_page.has_previous %}
+                            <li class="page-item"><a class="page-link" href="?page={{ articles_page.previous_page_number }}">&lt;</a></li>
+                          {% else %}
+                            <li class="page-item disabled">&lt;</li>
+                          {% endif %}
+                          {% for i in articles_page.paginator.page_range %}
+                            {% if articles_page.number == i %}
+                              <li class="page-item  active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+                              {% else %}
+                              <li class="page-item"><a class="page-link" href="?page={{ i }}">{{i}}</a></li>
+                            {% endif %}
+                          {% endfor %}
+                          {% if articles_page.has_next %}
+                            <li class="page-item"><a class="page-link" href="?page={{ articles_page.next_page_number }}">&gt;</a></li>
+                          {% else %}
+                            <li class="page-item disabled">&gt;</li>
+                          {% endif %}
+                      </ul>
+                      {% endif %}
+                    </nav>
+                  </div>
+                <!-- END post -->
+              </div>
+            </div>
+          </div>
+      <!-- END main-content -->
+
+      <!-- START SIDEBAR --> 
+      <div class="col-md-12 col-lg-4 sidebar">
+          <!-- TENTANG PENULIS -->
+          <div class="sidebar-box">
+            <div class="bio text-center">
+              <img src="{% static 'blog/images/foto.jpg' %}" alt="Image Placeholder" class="img-fluid">
+              <div class="bio-body">
+                <h2>Adwin Nugroho Siswoyo</h2>
+                <p>Data science enthusiasts, the man who love football and you.</p>
+                <p><a href="https://adwinugroho.github.io/" class="btn btn-primary btn-sm rounded">Read my resume</a></p>
+                <p class="social">
+                    <a href="http://www.facebook.com/adwinugroho94/" class="p-2"><span class="fa fa-facebook"></span></a>
+                    <a href="http://www.twitter.com/adwinugroho/" class="p-2"><span class="fa fa-twitter"></span></a>
+                    <a href="http://www.instagram.com/adwinnsiswoyo" class="p-2"><span class="fa fa-instagram"></span></a>
+                    <a href="http://www.github.com/adwinugroho" class="p-2"><span class="fa fa-github"></span></a>
+                    <a href="http://www.linkedin.com/in/adwin-nugroho-siswoyo" class="p-2"><span class="fa fa-linkedin"></span></a>
+                  </p>
+              </div>
+            </div>
+          </div>
+          <!-- END TENTANG PENULIS -->
+          <!-- END sidebar-box -->  
+          <div class="sidebar-box">
+            <h3 class="heading">Popular Post</h3>
+            <div class="post-entry-sidebar">
+              <ul>
+                  {% block list_recentpost %}
+                  {% for obj in articles_by_comment %}
+                    <li>
+                      <a href="{% url 'article:detail' slugInput=obj.slug %}">
+                        {% if obj.thumbnail %}
+                          <img src="{{obj.thumbnail.url}}" alt="Image placeholder" class="mr-4" style="width:100px;height:100px;">  
+                        {% else %}
+                          <img src="{% static 'blog/images/no-image.jpeg' %}" alt="Image placeholder" class="mr-4" style="width:100px;height:100px;">
+                        {% endif %}
+                        <div class="text">
+                          <h4>{{obj.title}}</h4>
+                        <div class="post-meta">
+                          <span class="mr-2">{{obj.timestamp|date}}</span>  
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                  {% endfor %}
+                {% endblock list_recentpost %}
+              </ul>
+            </div>
+          </div>
+          <!-- END sidebar-box -->
+    
+          <div class="sidebar-box">
+            <h3 class="heading">Categories</h3>
+            {% block list_categories_sidebar %}
+            <ul class="categories">
+                {% for cat in categories %}
+                  <li><a href="{% url 'article:category' categoryInput=cat %}">{{cat}}</a></li>  
+                {% endfor %}
+              </ul>
+            {% endblock list_categories_sidebar %}        
+          </div>
+        </div>
+      </div>
+{% endblock contents %}  

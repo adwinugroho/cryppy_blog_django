@@ -1,0 +1,98 @@
+{% extends 'accounts/base.html' %}
+
+{% block contents %}
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+            {% if request.user.is_staff %}
+                <h4>All category</h4>
+            </div>
+            <div class="card-body">
+                {% for message in messages %}
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    {{message}}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                {% endfor %}
+                <div class="table-responsive">
+                    <table class="table table-striped" id="myTable">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Title</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for obj in total_category %}
+                            <tr>
+                                <td>{{forloop.counter}}</td>
+                                <td>{{obj.title}}</td>
+                                <td>
+                                    <a href="{% url 'accounts:editCategory' obj.id %}"
+                                        class="btn btn-primary btn-action mr-1" data-toggle="tooltip" title="Edit"><i
+                                            class="fas fa-pencil-alt"></i></a>
+                                    <a href="{% url 'accounts:deleteConfirmCategory' obj.id %}"
+                                            class="btn btn-danger btn-action mr-1" data-toggle="tooltip" title="Edit"><i
+                                                class="fas fa-trash-alt"></i></a>
+                                </td>
+                                {% endfor %}
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+                <div class="card-header">
+                    <h4>All author</h4>
+                </div>
+            <div class="card-body">
+                {% for message in messages %}
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    {{message}}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                {% endfor %}
+                <div class="table-responsive">
+                        <table class="table table-striped" id="myTable">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Username</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for obj in total_author %}
+                                <tr>
+                                    <td>{{forloop.counter}}</td>
+                                    <td>{{obj.user.username}}</td>
+                                    <td>
+                                        <a href="{% url 'accounts:editAuthor' obj.user.id %}"
+                                            class="btn btn-primary btn-action mr-1" data-toggle="tooltip" title="Edit"><i
+                                                class="fas fa-pencil-alt"></i></a>
+                                        <a href="{% url 'accounts:deleteConfirmAuthor' obj.id %}"
+                                            class="btn btn-danger btn-action mr-1" data-toggle="tooltip" title="Edit"><i
+                                                class="fas fa-trash-alt">
+                                    </td>
+                                    {% endfor %}
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                {% else %}
+                <h4>Sorry, you're not staff, please contact admin</h4>
+                <hr>
+                <h5>adwinnugroho16@gmail.com</h5>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock contents %}

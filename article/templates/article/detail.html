@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block page_title %}
+<title>{{page_title}}</title>
+{% endblock page_title %}
+<!-- MAIN CONTENT -->
+{% block contents %}
+<div class="row blog-entries element-animate">
+    <div class="col-md-12 col-lg-8 main-content">
+      {% if articles_detail.thumbnail %}  
+        <img src="{{articles_detail.thumbnail.url}}" alt="Image" class="img-fluid mb-5" style="width:690px;height:462px;">
+      {% else %}
+        <img src="{% static 'blog/images/no-image.jpeg' %}" alt="Image" class="img-fluid mb-5" style="width:690px;height:462px;">
+      {% endif %}
+        <div class="post-meta">
+          <span class="author mr-2"><img src="{% static 'blog/images/default.png' %}" alt="Colorlib" class="mr-2">{{articles_detail.author.user}}</span>&bullet;
+          <span class="mr-2">{{articles_detail.timestamp|date}}</span> &bullet;
+          <a href="#disqus_thread"><span class="disqus-comment-count" data-disqus-url="http://localhost:8000/article/detail/{{articles_detail.slug}}">Post a Comment</a></span>
+        </div>
+        <h1 class="mb-4">{{articles_detail.title}}</h1>
+        {% for cat  in articles_detail.categories.all %}
+        <a class="category mb-5" href="{% url 'article:category' categoryInput=cat %}">{{cat}}</a>
+        {% endfor %}
+        <div class="post-content-body">
+            {{articles_detail.content|safe}}
+        </div>
+        
+        <div class="pt-5">
+            <p>Categories:  
+          {% for cat in articles_detail.categories.all  %}
+            <a href="{% url 'article:category' categoryInput=cat %}">{{cat}}</a> 
+          {% endfor %}
+        </div>
+
+        {% include 'snippets/comment.html' with url=articles_detail.slug %}
+          </div>
+      <!-- END main-content -->
+
+      <!-- START SIDEBAR --> 
+      <div class="col-md-12 col-lg-4 sidebar">
+          <!-- TENTANG PENULIS -->
+          <div class="sidebar-box">
+            <div class="bio text-center">
+              <img src="{% static 'blog/images/foto.jpg' %}" alt="Image Placeholder" class="img-fluid">
+              <div class="bio-body">
+                <h2>Adwin Nugroho Siswoyo</h2>
+                <p>Data science enthusiasts, the man who love football and you.</p>
+                <p><a href="https://adwinugroho.github.io" class="btn btn-primary btn-sm rounded">Read my resume</a></p>
+                <p class="social">
+                    <a href="http://www.facebook.com/adwinugroho94/" class="p-2"><span class="fa fa-facebook"></span></a>
+                    <a href="http://www.twitter.com/adwinugroho/" class="p-2"><span class="fa fa-twitter"></span></a>
+                    <a href="http://www.instagram.com/adwinnsiswoyo" class="p-2"><span class="fa fa-instagram"></span></a>
+                    <a href="http://www.github.com/adwinugroho" class="p-2"><span class="fa fa-github"></span></a>
+                    <a href="http://www.linkedin.com/in/adwin-nugroho-siswoyo" class="p-2"><span class="fa fa-linkedin"></span></a>
+                  </p>
+              </div>
+            </div>
+          </div>
+          <!-- END TENTANG PENULIS -->
+          <!-- END sidebar-box -->  
+          <div class="sidebar-box">
+            <h3 class="heading">Popular Post</h3>
+            <div class="post-entry-sidebar">
+              <ul>
+                  {% block list_recentpost %}
+                  {% for obj in articles_by_comment %}
+                    <li>
+                      <a href="{% url 'article:detail' slugInput=obj.slug %}">
+                        {% if obj.thumbnail %}
+                          <img src="{{obj.thumbnail.url}}" alt="Image placeholder" class="mr-4" style="width:100px;height:100px;">  
+                        {% else %}
+                          <img src="{% static 'blog/images/no-image.jpeg' %}" alt="Image placeholder" class="mr-4" style="width:100px;height:100px;">
+                        {% endif %}
+                        <div class="text">
+                          <h4>{{obj.title}}</h4>
+                        <div class="post-meta">
+                          <span class="mr-2">{{obj.timestamp|date}}</span>  
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                  {% endfor %}
+                {% endblock list_recentpost %}
+              </ul>
+            </div>
+          </div>
+          <!-- END sidebar-box -->
+    
+          <div class="sidebar-box">
+            <h3 class="heading">Categories</h3>
+            {% block list_categories_sidebar %}
+            <ul class="categories">
+                {% for cat in categories %}
+                  <li><a href="{% url 'article:category' categoryInput=cat %}">{{cat}}</a></li>  
+                {% endfor %}
+              </ul>
+            {% endblock list_categories_sidebar %}        
+          </div>
+        </div>
+      </div>
+{% endblock contents %}  

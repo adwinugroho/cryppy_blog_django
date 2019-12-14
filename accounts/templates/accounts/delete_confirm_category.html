@@ -1,0 +1,32 @@
+{% extends 'accounts/base.html' %}
+
+{% block contents %}
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+                <div class="card-header">
+                    <h4>All author</h4>
+                </div>
+            {% if request.user.is_staff %}
+            <div class="card-body">
+                {% for message in messages %}
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    {{message}}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                {% endfor %}
+                    <p>Are you sure delete this category? <b>{{total_category.title}}</b></p>
+                    <a href="{% url 'accounts:deleteCategory' total_category.id %}" class="btn btn-danger btn-action mr-1" data-toggle="tooltip"><i class="fas fa-trash-alt"></i></a>
+                    <a href="{% url 'accounts:listCategoryandAuthor' %}" class="btn btn-primary btn-action mr-1" data-toggle="tooltip"><i class="fas fa-reply"></i></a>                    
+            {% else %}
+                <h4>Sorry, you're not staff, please contact admin</h4>
+                <hr>
+                <h5>adwinnugroho16@gmail.com</h5>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock contents %}

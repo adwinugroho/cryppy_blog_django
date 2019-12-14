@@ -1,0 +1,74 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
+  <title>Login &mdash; Cryppy</title>
+    {% include 'accounts/snippets/styles.html' %}
+</head>
+
+<body>
+  <div id="app">
+    <section class="section">
+      <div class="container mt-5">
+        <div class="row">
+          <div class="col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-lg-6 offset-lg-3 col-xl-4 offset-xl-4">
+            <div class="login-brand">
+              <a href="{% url 'home' %}"><img src="{% static 'dashboard/assets/img/logo.svg' %}" alt="logo" width="100" class="shadow-light rounded-circle"></a>
+            </div>
+            {% if request.user.is_authenticated %}
+                <div class="mt-5 text-muted text-center">
+                  Please, go to dashboard! <a href="{% url 'accounts:dashboard' %}">Click here!</a>
+                </div>
+              {% else %}
+              <div class="card card-primary">
+                  <div class="card-header">
+                    <h4>Login</h4>
+                  </div>
+                  <div class="card-body">
+                      {% for message in messages %}
+                      <div class="alert alert-success alert-dismissible fade show" role="alert">
+                          {{message}}
+                          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                          </button>
+                      </div>
+                      {% endfor %}
+                    <form method="POST">
+                      <div class="form-group">
+                      {% if form.errors %}
+                        <p style="color: red">username or password not correct</p>
+                      {% endif %}
+                        {% csrf_token %}
+                        {% for field in form  %}
+                            {{field.label}}
+                            {{field}}
+                        {% endfor %}
+                      </div>
+    
+                      <div class="form-group">
+                        <button type="submit" class="btn btn-primary btn-lg btn-block" tabindex="4">
+                          Login
+                        </button>
+                      </div>
+                      <div class="mt-5 text-muted text-center">
+                        Don't have an account? <a href="{% url 'accounts:register' %}">Create One</a>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+            {% endif %}
+            <div class="simple-footer">
+              Copyright &copy; Stisla 2019
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- General JS Scripts -->
+  {% include 'accounts/snippets/scripts.html' %}
+</body>
+</html>

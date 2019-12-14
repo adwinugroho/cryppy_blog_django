@@ -1,0 +1,59 @@
+{% extends 'accounts/base.html' %}
+{% block contents %}
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h4>{{heading}}</h4>
+            </div>
+            <div class="card-body">
+                {% for message in messages %}
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    {{message}}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                {% endfor %}
+                {% if request.user.is_staff %}
+                {% load crispy_forms_tags %}
+                <form method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                        {% csrf_token %}
+                        {% for form in post_form %}
+                        {{form.label}}<br>
+                        {{ form }}<br>
+                        {% endfor %}
+                        {% for error in field.errors %}
+                        <p style="color: red">{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                    <p><b>If you wanna reset password please contact Admin. at adwinnugroho16@gmail.com</b></p>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">
+                            Save
+                        </button>
+                    </div>
+                </form>
+                <div class="form-group">
+                    <a href="{% url 'accounts:dashboard' %}">
+                        <button class="btn btn-warning">
+                            Back to Dashboard
+                        </button>
+                    </a>
+                </div>
+                {% else %}
+                <p>Sorry you're not author :(</p>
+                <div class="form-group">
+                        <a href="{% url 'accounts:dashboard' %}">
+                            <button class="btn btn-warning">
+                                Back to Dashboard
+                            </button>
+                        </a>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock contents %}
